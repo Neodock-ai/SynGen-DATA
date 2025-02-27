@@ -1,11 +1,4 @@
-# Flet provides the modern UI framework.
-flet==0.6.5
-
-# Pandas is used for data manipulation and CSV handling.
+flet==0.27.2
 pandas==1.5.3
-
-# SDV (Synthetic Data Vault) supplies the AI models (e.g., CTGAN) for generating synthetic data.
 sdv==0.19.2
-
-# NumPy is a dependency for numerical operations.
 numpy==1.21.0
