@@ -1,4 +1,4 @@
 flet==0.27.2
 pandas==1.5.3
-sdv==1.18.0   <-- pick a version that supports your Python version
+sdv==1.18.0
 numpy==1.21.0
