@@ -6,6 +6,7 @@ Users can upload a CSV dataset, specify the desired number of synthetic rows,
 and then generate and download a synthetic dataset with similar structure and distribution.
 """
 
+import os
 import flet as ft
 import pandas as pd
 import io
@@ -167,5 +168,7 @@ def main(page: ft.Page):
         download_button
     )
 
-# Launch the Flet app in the web browser.
-ft.app(target=main, view=ft.WEB_BROWSER)
+# Bind to the correct host and port.
+# Render provides a PORT environment variable; default to 8550 for local testing.
+port = int(os.environ.get("PORT", 8550))
+ft.app(target=main, host="0.0.0.0", port=port)
