@@ -2,17 +2,16 @@
 synthetic_generator.py
 
 This module provides an industry-level function to generate synthetic data
-using an AI-based method (CTGAN from the SDV library). The function 
-`generate_synthetic_data` accepts an original dataset as a pandas DataFrame 
-and a target number of synthetic rows, then returns a new DataFrame containing 
+using an AI-based method (CTGAN from the SDV library, version 1.x).
+The function `generate_synthetic_data` accepts an original dataset as a pandas DataFrame
+and a target number of synthetic rows, then returns a new DataFrame containing
 synthetic data that mirrors the original dataset's structure and distribution.
 """
 
 import logging
 import time
 import pandas as pd
-from sdv.tabular import CTGAN
-from sdv.metadata import SingleTableMetadata
+from sdv.single_table import CTGAN  # Updated import for SDV 1.x
 
 # Configure logging to capture detailed production-level information.
 logging.basicConfig(
@@ -23,7 +22,7 @@ logging.basicConfig(
 
 def generate_synthetic_data(data: pd.DataFrame, num_rows: int) -> pd.DataFrame:
     """
-    Generate synthetic data using CTGAN (Conditional GAN for Tabular Data).
+    Generate synthetic data using CTGAN.
 
     This function analyzes the input DataFrame, trains a CTGAN model to capture
     the underlying distribution, and then samples synthetic data that resembles 
@@ -53,13 +52,8 @@ def generate_synthetic_data(data: pd.DataFrame, num_rows: int) -> pd.DataFrame:
         start_time = time.time()
         logging.info("Starting synthetic data generation using CTGAN.")
         
-        # Detect metadata from the original data.
-        metadata = SingleTableMetadata()
-        metadata.detect_from_dataframe(data)
-        logging.info("Metadata successfully detected from the input DataFrame.")
-
         # Initialize the CTGAN model.
-        # The 'epochs' parameter is set to 300; adjust as needed based on your dataset.
+        # Adjust 'epochs' as needed based on your dataset's complexity.
         model = CTGAN(epochs=300, verbose=True)
         logging.info("CTGAN model initialized. Beginning training...")
 
